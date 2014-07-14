@@ -72,7 +72,7 @@ module Sidekiq
           else
             queue
           end
-          msg['error_message'] = e.message
+          msg['error_message'] = e.message[0, 10_000]
           msg['error_class'] = e.class.name
           count = if msg['retry_count']
             msg['retried_at'] = Time.now.utc
